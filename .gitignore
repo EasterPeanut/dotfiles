@@ -1,5 +1,5 @@
 .DS_Store
-nvim/.netrwhist
-nvim/autoload/
-nvim/nvim.log
-nvim/plugged/
+dotfiles/nvim/.netrwhist
+dotfiles/nvim/autoload/
+dotfiles/nvim/nvim.log
+dotfiles/nvim/plugged/
