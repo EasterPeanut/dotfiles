@@ -1,0 +1,5 @@
+.DS_Store
+nvim/.netrwhist
+nvim/autoload/
+nvim/nvim.log
+nvim/plugged/
