@@ -49,14 +49,23 @@ nmap w- <C-w>10-
 
 call plug#begin('~/.vim/plugged')
 
+" Plug 'github/copilot.vim'
+" let g:copilot_node_command = "~/.asdf/installs/nodejs/16.15.0/bin/node"
+
 Plug 'blueyed/vim-diminactive' " this plugin is slow
 
 Plug 'gruvbox-community/gruvbox' " forked from: Plug 'morhetz/gruvbox'
 
 Plug 'elixir-editors/vim-elixir'
-Plug 'mhinz/vim-mix-format'
-let g:mix_format_on_save = 1
-let g:mix_format_silent_errors = 1
+" Plug 'mhinz/vim-mix-format'
+" let g:mix_format_on_save = 1
+" let g:mix_format_silent_errors = 1
+
+" Temporary fix for formatting heex files (broke with the vim-elixir update)
+au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
+au BufRead,BufNewFile mix.lock set filetype=elixir
+" End temporary fix
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
@@ -65,8 +74,8 @@ let g:python3_host_prog = '/usr/local/bin/python3.9'
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-Plug 'slashmili/alchemist.vim'
-let g:alchemist#elixir_erlang_src = "/usr/local/share/src"
+" Plug 'slashmili/alchemist.vim'
+" let g:alchemist#elixir_erlang_src = "/usr/local/share/src"
 
 Plug 'rizzatti/dash.vim'
 
@@ -85,8 +94,16 @@ nmap <silent> tg :TestVisit<CR>
 tmap <C-o> <C-\><C-n>
 
 Plug 'dense-analysis/ale'
-let g:ale_fixers = { 'scss': ['stylelint'], 'css': ['stylelint'], 'javascript': ['eslint'] }
+let g:ale_fixers = {
+\ 'elixir': ['mix_format'],
+\ 'eelixir': ['mix_format'],
+\ 'scss': ['stylelint'],
+\ 'css': ['stylelint'],
+\ 'javascript': ['eslint'],
+\ 'ruby': ['rubocop'],
+\}
 let g:ale_fix_on_save = 1
+let g:ale_virtualtext_cursor = 0
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'

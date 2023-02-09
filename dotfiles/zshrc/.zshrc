@@ -6,8 +6,13 @@ fi
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/opt/python/libexec/bin:$PATH"
+export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+
+export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/opt/openssl@3/lib/"
 
 export GIT_EDITOR=nvim
+
+eval "$(direnv hook zsh)"
 
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
@@ -28,5 +33,9 @@ fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
-export KERL_CONFIGURE_OPTIONS="--disable-debug --disable-silent-rules --disable-sctp --without-javac --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-smp-support --enable-threads --enable-kernel-poll --enable-wx --enable-darwin-64bit --with-ssl=$(brew --prefix openssl)"
+export KERL_CONFIGURE_OPTIONS="--without-javac --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-smp-support --enable-threads --enable-kernel-poll --enable-wx --with-ssl=$(brew --prefix openssl)"
 
+# export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=/usr/local/opt/openssl@3"
+
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
